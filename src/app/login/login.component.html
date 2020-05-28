@@ -1,0 +1,61 @@
+<main role="main">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="agentAddForm" (ngSubmit)="login()" class="">
+        <h2 class="mt-3 pt-3">Kullanıcı Girişi</h2>
+
+        <label>Kullanıcı Adı</label>
+        <div class="form-group">
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control"
+            autofocus
+          />
+          <span
+            class="help-block"
+            *ngIf="
+            agentAddForm.get('username').hasError('required') &&
+            agentAddForm.get('username').touched
+            "
+            >Kullanıcı adı zorunludur</span
+          >
+        </div>
+
+       
+
+        <label>Şifre</label>
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            class="form-control"
+          />
+          <span
+            class="help-block"
+            *ngIf="
+            agentAddForm.get('password').hasError('required') &&
+            agentAddForm.get('password').touched
+            "
+            >Şirket adı zorunludur</span
+          >
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-lg btn-primary btn-block"
+          [disabled]="!agentAddForm.valid"
+          
+        >
+          Giriş
+        </button>
+
+        <h6>{{ agentAddForm.value | json }}</h6>
+        <h6>{{ agentAddForm.status | json }}</h6>
+      </form>
+    </div>
+  </div>
+</main>
