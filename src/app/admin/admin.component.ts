@@ -30,21 +30,12 @@ export class AdminComponent implements OnInit {
 
   agents: Agent[];
 
-  ngOnInit() {    
-    
+  ngOnInit() {
     this.adminService.getAgents().subscribe((data) => {
       this.agents = data;
       this.listData = new MatTableDataSource(this.agents);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-
-      this.listData.filterPredicate = (data, filter) => {
-        return this.displayedColumns.some((ele) => {
-          return (
-            ele != 'actions' && data[ele].toLowerCase().indexOf(filter) !=-1
-          );
-        });
-      };
     });
   }
 
@@ -57,18 +48,20 @@ export class AdminComponent implements OnInit {
     this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
-  deleteAgent(agent:Agent) {
-    if(confirm(agent.username+" kullanıcısını silmek istediğinize emin misiniz?" ))    
-    this.adminService.deleteAgent(agent.id);
-    window.alert(agent.username+"kullanıcısı silinmiştir.")
+  deleteAgent(agent: Agent) {
+    if (
+      confirm(
+        agent.username + ' kullanıcısını silmek istediğinize emin misiniz?'
+      )
+    )
+      this.adminService.deleteAgent(agent.id);
+    window.alert(agent.username + 'kullanıcısı silinmiştir.');
   }
 
-  onCreate() {    
+  onCreate() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    this.dialog.open(AgentAddComponent)
+    this.dialog.open(AgentAddComponent);
   }
-
-
 }

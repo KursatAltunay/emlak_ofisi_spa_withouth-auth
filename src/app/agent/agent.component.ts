@@ -23,7 +23,7 @@ export class AgentComponent implements OnInit {
     'location',
     'advertType',
     'heating',
-    'numberOfRooms', 
+    'numberOfRooms',
     'actions',
   ];
 
@@ -38,13 +38,6 @@ export class AgentComponent implements OnInit {
       this.listData = new MatTableDataSource(this.adverts);
       this.listData.sort = this.sort;
       this.listData.paginator = this.paginator;
-      this.listData.filterPredicate = (data, filter) => {
-        return this.displayedColumns.some((ele) => {
-          return (
-            ele != 'actions' && data[ele].toLowerCase().indexOf(filter) != -1
-          );
-        });
-      };
     });
   }
 
@@ -54,8 +47,7 @@ export class AgentComponent implements OnInit {
   }
 
   applyFilter() {
-   
-    this.listData.filter=this.searchKey.trim().toLowerCase();
+    this.listData.filter = this.searchKey.trim().toLowerCase();
   }
 
   deleteAdvert(advert: Advert) {
